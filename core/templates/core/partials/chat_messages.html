@@ -1,0 +1,14 @@
+<div class="flex flex-col space-y-3 pb-4">
+    {% for msg in messages %}
+        <div class="flex {% if msg.sender == request.user %}justify-end{% else %}justify-start{% endif %}">
+            <div class="max-w-xs px-4 py-2 rounded-lg {% if msg.sender == request.user %}bg-blue-600 text-white rounded-br-none{% else %}bg-gray-200 text-gray-800 rounded-bl-none{% endif %} shadow-sm">
+                {% if msg.sender != request.user %}
+                    <span class="text-xs font-bold block mb-1 text-gray-500">{{ msg.sender.username }}</span>
+                {% endif %}
+                <p class="text-sm">{{ msg.text }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center text-gray-500 text-sm mt-4">No messages yet. Say hi!</p>
+    {% endfor %}
+</div>
